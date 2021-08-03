@@ -10,12 +10,12 @@ WORKDIR /src
 COPY ["SampleApi.csproj", "./"]
 RUN dotnet restore "SampleApi.csproj"
 
-COPY ["SampleApi.csproj", "./"]
+COPY . .
+# COPY ["SampleApi.csproj", "./"]
 # WORKDIR "/src/SampleApi"
 RUN dotnet build "SampleApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-COPY . ./
 RUN dotnet publish "SampleApi.csproj" -c Release -o /app/publish
 
 FROM base AS final
